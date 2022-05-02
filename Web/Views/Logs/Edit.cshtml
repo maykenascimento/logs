@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Log - Edit";
+}
+@model Web.Models.LogEditViewModel
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="card my-4 col">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="date" class="text-left">Date</label>
+                                <input type="text" class="form-control w-100" value="@Model.Log.Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="logType" class="text-left">Type</label>
+                                <input type="text" class="form-control w-100" value="@Model.Log.Type" readonly>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="logMessage" class="text-left">Message</label>
+                                <input type="text" class="form-control w-100" value="@Model.Log.Description" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex">
+            <a href="/logs" class="btn btn-link mx-auto">Back</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.24" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" PrivateAssets="all" Version="3.1.24" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.24" />
+    <PackageReference Include="SQLite" Version="3.13.0" />
+    <PackageReference Include="FileContextCore" Version="3.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Repositories\" />
+    <None Remove="Extensions\" />
+    <None Remove="FileContextCore" />
+    <None Remove="Repositories\ApiRepository\" />
+    <None Remove="Repositories\FileRepository\" />
+    <None Remove="Repositories\Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Repositories\Api\" />
+    <Folder Include="Repositories\File\" />
+    <Folder Include="Repositories\Database\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logs.BLL\Logs.BLL.csproj" />
+    <ProjectReference Include="..\Logs.Shared\Logs.Shared.csproj" />
+  </ItemGroup>
+</Project>

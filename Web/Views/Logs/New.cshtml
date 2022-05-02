@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Log - New";
+}
+@model Web.Models.LogEditViewModel
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="card my-4 col">
+            <div class="card-body">
+                <form action="/logs/new" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="logType" class="text-left">Type</label>
+                                    <select class="custom-select my-1" id="logType" name="typeId">
+                                        @if (Model.Types != null && Model.Types.Count > 0)
+                                        {
+                                            @for (int i = 0; i < Model.Types.Count; i++)
+                                            {
+                                                <option value="@Model.Types[i].Id">@Model.Types[i].Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="logMessage" class="text-left">Message</label>
+                                    <input type="text" class="form-control w-100" id="logMessage" name="description" placeholder="Enter the message">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex">
+            <a href="/logs" class="btn btn-link mx-auto">Back</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Audit records";
+}
+@model List<Web.Models.AuditViewModel>
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Source</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model?.Count > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="1" class="text-nowrap">@item.Date</td>
+                    <td>@item.Type</td>
+                    <td>@item.Source</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4"><h5 class="my4 text-center">Nothing yet</h5></td>
+            </tr>
+
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                <div class="d-flex w-100">
+                    <div class="ml-auto">
+                        <form action="Audit" id="paginationFilter" class="form-inline ml-auto">
+                            <div class="form-group mr-2">
+                                <label class="my-1 mr-2" for="pageSize">page size:</label>
+                                <select class="custom-select my-1 mr-sm-2" id="pageSize" name="pageSize" onchange="paginate()">
+                                    @foreach (var item in ViewBag.queryParams.GetPagination)
+                                    {
+
+                                        @if (item.Key == ViewBag.queryParams.PageSize)
+                                        {
+                                            <option value="@item.Key" selected>@item.Key</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Key">@item.Key</option>
+                                        }
+                                    }
+                                </select>
+                                <input type="hidden" id="pageIndex" name="pageIndex" value="@ViewBag.queryParams.PageIndex" />
+                            </div>
+                        </form>
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end my-auto">
+                            @{
+                                var pages = Math.Ceiling((decimal)(ViewBag.Count / ViewBag.queryParams.PageSize)) + 1;
+                            }
+                            @for (int i = 1; i <= pages; i++)
+                            {
+                                <li class="page-item"><a class="page-link" onclick="pageIndexChanged(@i); return false;" aria-label="@i">@i</a></li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<script>
+
+    function pageIndexChanged(val) {
+        let pageIndexEl = document.getElementById('pageIndex');
+        pageIndexEl.value = val;
+
+        paginate();
+    }
+
+    function paginate() {
+        let form = document.getElementById('paginationFilter');
+        form.submit();
+    }
+
+</script>
